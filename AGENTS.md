@@ -63,6 +63,5 @@ src/
 ## Deployment
 
 1. Set `.env` with bot token, client ID, guild ID
-2. `docker build -t ti4-draft-bot .`
-3. `docker run -d --name ti4-draft-bot --env-file .env -v $(pwd)/data:/app/data ti4-draft-bot`
-4. `docker exec ti4-draft-bot node dist/deploy-commands.js`
+2. `docker compose up -d` (or `docker build` + `docker run -d --restart unless-stopped`)
+3. `docker exec ti4-blind-draft-bot-bot-1 node dist/deploy-commands.js`

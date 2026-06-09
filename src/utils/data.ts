@@ -1,12 +1,23 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir, access } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Draft } from "../types.js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const DRAFTS_PATH = join(__dirname, "..", "..", "data", "drafts.json");
+const DATA_DIR =
+    process.env.DATA_DIR ||
+    join(dirname(fileURLToPath(import.meta.url)), "..", "..", "data");
+const DRAFTS_PATH = join(DATA_DIR, "drafts.json");
+
+async function ensureDataDir(): Promise<void> {
+    try {
+        await access(DATA_DIR);
+    } catch {
+        await mkdir(DATA_DIR, { recursive: true });
+    }
+}
 
 async function ensureDraftsFile(): Promise<void> {
+    await ensureDataDir();
     try {
         await readFile(DRAFTS_PATH, "utf-8");
     } catch {

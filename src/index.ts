@@ -101,4 +101,24 @@ if (!token) {
     process.exit(1);
 }
 
-client.login(token);
+async function start() {
+    try {
+        await client.login(token);
+        console.log("Bot is running.");
+    } catch (error) {
+        console.error("Failed to login:", error);
+        console.log("Reconnecting in 5 seconds...");
+        await new Promise((r) => setTimeout(r, 5000));
+        process.exit(1);
+    }
+}
+
+client.on(Events.ShardError, (error) => {
+    console.error("WebSocket connection error:", error);
+});
+
+client.on(Events.Error, (error) => {
+    console.error("Client error:", error);
+});
+
+start();
