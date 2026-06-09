@@ -1,0 +1,30 @@
+{
+    "name": "ti4-blind-draft-bot",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Discord bot for Twilight Imperium 4 blind faction drafts",
+    "main": "dist/index.js",
+    "scripts": {
+        "dev": "tsx watch --env-file=.env src/index.ts",
+        "build": "esbuild src/index.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/index.js && esbuild src/deploy-commands.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/deploy-commands.js",
+        "deploy-commands": "tsx --env-file=.env src/deploy-commands.ts",
+        "start": "node --env-file=.env dist/index.js",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "dependencies": {
+        "discord.js": "^14.18.0"
+    },
+    "devDependencies": {
+        "esbuild": "^0.25.4",
+        "prettier": "^3.5.3",
+        "tsx": "^4.19.4",
+        "typescript": "^5.8.3"
+    },
+    "packageManager": "pnpm@10.7.1",
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "esbuild"
+        ]
+    }
+}
