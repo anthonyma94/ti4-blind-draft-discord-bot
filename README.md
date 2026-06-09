@@ -60,14 +60,17 @@ pnpm run dev               # Run bot in watch mode (tsx)
 ### Docker
 
 ```bash
-# Build
+# Build locally
 docker build -t ti4-draft-bot .
+
+# Or pull from GitHub Container Registry
+docker pull ghcr.io/<your-username>/ti4-blind-draft-bot:latest
 
 # Run (with data persisted to host)
 docker run -d --name ti4-draft-bot \
     --env-file .env \
     -v $(pwd)/data:/app/data \
-    ti4-draft-bot
+    ti4-draft-bot   # or ghcr.io/<your-username>/ti4-blind-draft-bot:latest
 
 # Register commands after container starts
 docker exec ti4-draft-bot node dist/deploy-commands.js
