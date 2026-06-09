@@ -140,7 +140,7 @@ export async function handleSelectPlayers(
     pending.playerIds = interaction.values;
     setPending(stateKey, pending);
 
-    const factionCount = (await loadFactions()).length;
+    const factionCount = loadFactions().length;
     const maxOptions = Math.min(
         25,
         Math.floor(factionCount / pending.playerIds.length),

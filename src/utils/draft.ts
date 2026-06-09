@@ -1,16 +1,10 @@
 import { randomUUID } from "node:crypto";
-import { readFile } from "node:fs/promises";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import type { Draft } from "../types.js";
 import { addDraft, readDrafts, getDraft } from "./data.js";
+import { FACTIONS } from "../factions.js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const FACTIONS_PATH = join(__dirname, "..", "..", "data", "factions.json");
-
-export async function loadFactions(): Promise<string[]> {
-    const data = await readFile(FACTIONS_PATH, "utf-8");
-    return JSON.parse(data) as string[];
+export function loadFactions(): string[] {
+    return FACTIONS;
 }
 
 function shuffle<T>(array: T[]): T[] {
@@ -35,7 +29,7 @@ export async function createDraft(
     creatorId: string,
     guildId: string,
 ): Promise<Draft> {
-    const factions = await loadFactions();
+    const factions = loadFactions();
     const shuffled = shuffle(factions);
     const needed = playerIds.length * optionsPerPlayer;
     const selected = shuffled.slice(0, needed);

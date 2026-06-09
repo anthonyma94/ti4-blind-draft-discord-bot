@@ -96,7 +96,7 @@ Delete a draft you created. Requires confirmation.
 
 ## How It Works
 
-1. The bot reads the faction list from `data/factions.json`
+1. The faction list is compiled into the bot
 2. When a draft is created, factions are shuffled and split into equal pools
 3. Each player is randomly assigned to a pool
 4. All draft data is stored in `data/drafts.json`
@@ -104,10 +104,10 @@ Delete a draft you created. Requires confirmation.
 
 ## Data Files
 
-| File                 | Purpose                                                   |
-| -------------------- | --------------------------------------------------------- |
-| `data/factions.json` | Static faction list (Base + PoK + Thunder's Edge + Codex) |
-| `data/drafts.json`   | Active drafts (created at runtime)                        |
+| File               | Purpose                                                                    |
+| ------------------ | -------------------------------------------------------------------------- |
+| `data/drafts.json` | Active drafts (created at runtime, persisted via volume)                   |
+| `src/factions.ts`  | Faction list compiled into the image (Base + PoK + Thunder's Edge + Codex) |
 
 ## Project Scripts
 

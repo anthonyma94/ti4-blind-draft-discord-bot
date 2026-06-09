@@ -12,5 +12,4 @@ RUN corepack enable
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 COPY --from=build /app/dist ./dist
-COPY --from=build /app/data ./data
 CMD ["node", "dist/index.js"]

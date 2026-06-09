@@ -38,6 +38,7 @@ pnpm exec tsc --noEmit
 src/
 ├── index.ts              # Client init, interaction handler routing
 ├── deploy-commands.ts    # Guild slash command registration script
+├── factions.ts           # Hardcoded faction list (30 factions)
 ├── commands/
 │   ├── create-draft.ts   # /create-draft — 3-step (player select → options select → confirm)
 │   ├── view-pool.ts      # /view-pool — 2-step (draft select → show pool)
